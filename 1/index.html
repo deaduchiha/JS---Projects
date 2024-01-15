@@ -6,7 +6,77 @@
     <title>project - 1</title>
     <link rel="stylesheet" href="assets/styles/style.css" />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <p>Web Dev | 1st project</p>
+    </header>
+    <main>
+      <div class="search">
+        <input type="text" placeholder="search name" id="search-input" />
+        <div>
+          <button class="filter">All</button>
+          <button class="filter">Nike</button>
+          <button class="filter">Adidas</button>
+          <button class="filter">Puma</button>
+          <button class="filter">Asics</button>
+        </div>
+        <div>
+          <input type="number" placeholder="search price" />
+          <button>search</button>
+        </div>
+      </div>
+
+      <div id="products">
+        <div class="product-item" data-category="nike">
+          <img src="assets/images/Air Jordan 1 Retro High OG.jpeg" alt="nike" />
+          <p>Air Jordan 1 Retro High OG</p>
+          <span>180</span>
+        </div>
+
+        <div class="product-item" data-category="nike">
+          <img src="assets/images/Nike Metcon 9 AMP.png" alt="nike" />
+          <p>Nike Metcon 9 AMP</p>
+          <span>160</span>
+        </div>
+
+        <div class="product-item" data-category="nike">
+          <img src="assets/images/Nike Dunk Low.png" alt="nike" />
+          <p>Nike Dunk Low</p>
+          <span>120</span>
+        </div>
+
+        <div class="product-item" data-category="adidas">
+          <img src="assets/images/SAMBA OG SHOES.avif" alt="adidas" />
+          <p>SAMBA OG SHOES</p>
+          <span>120</span>
+        </div>
+
+        <div class="product-item" data-category="adidas">
+          <img src="assets/images/GALAXY 5 SHOES.avif" alt="adidas" />
+          <p>GALAXY 5 SHOES</p>
+          <span>42.95</span>
+        </div>
+
+        <div class="product-item" data-category="adidas">
+          <img src="assets/images/RUN FALCON 2.0 SHOES.avif" alt="adidas" />
+          <p>RUN FALCON</p>
+          <span>45</span>
+        </div>
+
+        <div class="product-item" data-category="puma">
+          <img src="assets/images/Palermo-Lth.avif" alt="puma" />
+          <p>Palermo Lth</p>
+          <span>75</span>
+        </div>
+
+        <div class="product-item" data-category="asics">
+          <img src="assets/images/ASICS GEL Nimbus 25.jpeg" alt="asics" />
+          <p>ASICS GEL Nimbus 25</p>
+          <span>174</span>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
 
 <script src="assets/scripts/main.js"></script>
