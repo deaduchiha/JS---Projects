@@ -89,3 +89,9 @@ button {
 .product-item span::before {
   content: "$";
 }
+
+.selected {
+  color: #272727;
+  background-color: #ababab;
+  border: 2px solid #272727;
+}
