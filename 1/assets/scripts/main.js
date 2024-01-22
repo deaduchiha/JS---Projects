@@ -2,8 +2,14 @@ const searchInput = document.getElementById("search-input");
 const products = document.querySelectorAll(".product-item");
 const buttons = document.querySelectorAll(".filter");
 
+const priceButton = document
+  .getElementById("search-price")
+  .querySelector("button");
+
+// const priceButton = priceDiv.querySelector("button");
+
 const searchHandler = (e) => {
-  // to lowerCase + trim()=> delete first and last spacesaboul
+  // to lowerCase + trim()=> delete first and last spaces
 
   const searchValue = e.target.value.toLowerCase().trim();
 
@@ -21,7 +27,8 @@ const searchHandler = (e) => {
 
 // check after each time client click on keyboard
 searchInput.addEventListener("keyup", searchHandler);
-// - - - - - - - -
+
+// - - - - - - - -s
 
 const changeClass = (filter) => {
   buttons.forEach((button) => {
@@ -50,3 +57,26 @@ const filterHandler = (event) => {
 };
 
 buttons.forEach((btn) => btn.addEventListener("click", filterHandler));
+
+// - - - - - - - -
+
+const searchPriceHandler = (event) => {
+  const searchPrice = +event.target.parentElement.children[0].value;
+  products.forEach((product) => {
+    const price = +product.children[2].innerText;
+
+    if (!searchPrice) {
+      product.style.display = "block";
+    } else {
+      searchPrice === price
+        ? (product.style.display = "block")
+        : (product.style.display = "none");
+    }
+  });
+};
+
+priceButton.addEventListener("click", searchPriceHandler);
+
+// - - - - - - - -
+
+window.addEventListener("load");
