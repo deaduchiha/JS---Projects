@@ -30,6 +30,11 @@ const showAlert = (message, type) => {
   }, 1500);
 };
 
+// 5
+const saveToLocalStorage = () => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
+
 // 1:
 const addHandler = () => {
   const task = taskInput.value;
@@ -45,6 +50,7 @@ const addHandler = () => {
 
   if (task) {
     todos.push(todo);
+    saveToLocalStorage(); // its for 5
 
     // explain why we do this
     taskInput.value = "";
