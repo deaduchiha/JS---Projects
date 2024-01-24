@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  font-family: Roboto;
+  font-family: Roboto, helvetica;
   max-width: 950px;
   border: 1px solid;
   margin: 25px auto;

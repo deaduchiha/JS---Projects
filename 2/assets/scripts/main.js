@@ -6,6 +6,13 @@ const alertMessage = document.getElementById("alert-message");
 // 2: for push object in here
 const todos = [];
 
+// 4: for generate id
+const generateId = () => {
+  return Math.round(
+    Math.random() * Math.random() * Math.pow(10, 15)
+  ).toString(); // we can generate any id its just example
+};
+
 // 3 alert message
 const showAlert = (message, type) => {
   // why we write this ?
@@ -30,6 +37,7 @@ const addHandler = () => {
 
   // ECM6
   const todo = {
+    id: generateId(),
     task,
     date,
     completed: false,
