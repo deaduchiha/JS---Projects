@@ -2,6 +2,7 @@ const taskInput = document.getElementById("task-input");
 const dateInput = document.getElementById("date-input");
 const addButton = document.getElementById("add-button");
 const alertMessage = document.getElementById("alert-message");
+const todosBody = document.querySelector("tbody");
 
 // 2: for push object in here
 // const todos = []
@@ -38,6 +39,36 @@ const saveToLocalStorage = () => {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
+// 6
+const displayTodos = () => {
+  // we should add this comment below line to check what happened
+  todosBody.innerHTML = "";
+  // todos.length === 0 => its not professional
+  if (!todos.length) {
+    todosBody.innerHTML = `
+    <tr>
+      <td colspan="4  ">no task found</td>
+    </tr>`;
+    return;
+  }
+
+  todos.forEach((todo) => {
+    todosBody.innerHTML += `
+      <tr>
+        <td>${todo.task}</td>
+        <td>${todo.date || "no date"}</td>
+        <td>${todo.status ? "completed" : "pending"}</td>
+        <td>
+          <button>edit</button>
+          <button>do</button>
+          <button>delete</button>
+        </td>
+      </tr>
+    `;
+  });
+};
+displayTodos();
+
 // 1:
 const addHandler = () => {
   const task = taskInput.value;
@@ -54,6 +85,7 @@ const addHandler = () => {
   if (task) {
     todos.push(todo);
     saveToLocalStorage(); // its for 5
+    displayTodos();
 
     // explain why we do this
     taskInput.value = "";
