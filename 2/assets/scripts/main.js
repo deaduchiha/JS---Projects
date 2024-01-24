@@ -4,7 +4,10 @@ const addButton = document.getElementById("add-button");
 const alertMessage = document.getElementById("alert-message");
 
 // 2: for push object in here
-const todos = [];
+// const todos = []
+// const todos = JSON.parse(localStorage.getItem("todos")); // its have ERROR for first time we cant do this
+const todos = JSON.parse(localStorage.getItem("todos")) || []; // its have ERROR for first time we cant do this
+console.log(todos);
 
 // 4: for generate id
 const generateId = () => {
