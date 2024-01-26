@@ -3,11 +3,12 @@ const dateInput = document.getElementById("date-input");
 const addButton = document.getElementById("add-button");
 const alertMessage = document.getElementById("alert-message");
 const todosBody = document.querySelector("tbody");
+const deleteAllButton = document.getElementById("delete-all-button");
 
 // 2: for push object in here
 // const todos = []
 // const todos = JSON.parse(localStorage.getItem("todos")); // its have ERROR for first time we cant do this
-const todos = JSON.parse(localStorage.getItem("todos")) || []; // its have ERROR for first time we cant do this
+let todos = JSON.parse(localStorage.getItem("todos")) || []; // its have ERROR for first time we cant do this
 console.log(todos);
 
 // 4: for generate id
@@ -67,7 +68,6 @@ const displayTodos = () => {
     `;
   });
 };
-displayTodos();
 
 // 1:
 const addHandler = () => {
@@ -98,4 +98,18 @@ const addHandler = () => {
   }
 };
 
+const deleteAllHandler = () => {
+  if (todos.length) {
+    todos = [];
+    saveToLocalStorage();
+    displayTodos();
+    showAlert("all todos clear successfully", "success");
+  } else {
+    showAlert("no todos for clear", "error");
+  }
+};
+
+deleteAllButton.addEventListener("click", deleteAllHandler);
+
 addButton.addEventListener("click", addHandler);
+window.addEventListener("load", displayTodos()); // 7
