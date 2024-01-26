@@ -58,10 +58,12 @@ const displayTodos = () => {
       <tr>
         <td>${todo.task}</td>
         <td>${todo.date || "no date"}</td>
-        <td>${todo.status ? "completed" : "pending"}</td>
+        <td>${todo.completed ? "completed" : "pending"}</td>
         <td>
           <button>edit</button>
-          <button>do</button>
+          <button onclick="toggleHandler('${todo.id}')" >${
+      todo.completed ? "undo" : "do"
+    }</button>
           <button onclick="deleteHandler('${todo.id}')" >delete</button>
         </td>
       </tr>
@@ -116,6 +118,42 @@ const deleteHandler = (id) => {
   saveToLocalStorage();
   displayTodos();
   showAlert("todo deleted", "success");
+};
+
+// references types
+const toggleHandler = (id) => {
+  console.log(id);
+  // first way and long way
+
+  // const newTodos = todos.map((todo) => {
+  //   if (todo.id === id) {
+  //     // return {
+  //     //   id: todo.id,
+  //     //   task: todo.task,
+  //     //   date: todo.date,
+  //     //   completed: !todo.completed,
+  //     // };
+
+  //     // we can use this way instead of upper
+  //     return {
+  //       ...todo,
+  //       completed: !todo.completed,
+  //     };
+  //   } else {
+  //     return todo;
+  //   }
+  // });
+  // todos = newTodos;
+  //  --------------------
+
+  // second way and better way
+  const todo = todos.find((todo) => todo.id === id);
+  todo.completed = !todo.completed;
+
+  saveToLocalStorage();
+  displayTodos();
+  showAlert("todo status changed.", "success");
+  // console.log(newTodos);
 };
 
 addButton.addEventListener("click", addHandler);
