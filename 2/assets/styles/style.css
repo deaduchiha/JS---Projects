@@ -133,3 +133,7 @@ tbody td button:nth-child(3) {
 .alert-error {
   background-color: #ff3333;
 }
+
+#edit-button {
+  display: none;
+}
