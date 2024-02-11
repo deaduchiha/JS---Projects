@@ -5,6 +5,7 @@ const alertMessage = document.getElementById("alert-message");
 const todosBody = document.querySelector("tbody");
 const deleteAllButton = document.getElementById("delete-all-button");
 const editButton = document.getElementById("edit-button");
+const filterButtons = document.querySelectorAll(".filter-todos");
 
 // 2: for push object in here
 // const todos = []
@@ -42,11 +43,15 @@ const saveToLocalStorage = () => {
 };
 
 // 6
-const displayTodos = () => {
+// we set data for display when filtering todos
+const displayTodos = (data) => {
+  const todoList = data ? data : todos;
+
   // we should add this comment below line to check what happened
   todosBody.innerHTML = "";
   // todos.length === 0 => its not professional
-  if (!todos.length) {
+  // change todos to todoList
+  if (!todoList.length) {
     todosBody.innerHTML = `
     <tr>
       <td colspan="4  ">no task found</td>
@@ -54,7 +59,8 @@ const displayTodos = () => {
     return;
   }
 
-  todos.forEach((todo) => {
+  // change todos to todoList
+  todoList.forEach((todo) => {
     todosBody.innerHTML += `
       <tr>
         <td>${todo.task}</td>
@@ -186,6 +192,31 @@ const applyEditHandler = (event) => {
   displayTodos();
   showAlert("todo edited.", "success");
 };
+
+const filterHandler = (event) => {
+  let filteredTodos = null; // don't let a variable be undefined null is better
+  const { filter } = event.target.dataset;
+
+  switch (filter) {
+    case "pending":
+      filteredTodos = todos.filter((todo) => todo.completed === false);
+      break;
+
+    case "completed":
+      filteredTodos = todos.filter((todo) => todo.completed === true);
+      break;
+
+    default:
+      filteredTodos = todos;
+      break;
+  }
+  displayTodos(filteredTodos);
+  // console.log(filteredTodos);
+};
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", filterHandler);
+});
 
 addButton.addEventListener("click", addHandler);
 editButton.addEventListener("click", applyEditHandler);
