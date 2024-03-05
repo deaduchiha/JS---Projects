@@ -1,3 +1,4 @@
+import formatData from "./helper.js";
 // we talked about BASE_URL, END POINT
 // we have queries too -> what is queries?
 // this is our API => https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple
@@ -8,21 +9,6 @@ let formattedData = null; // for having global variable of our data
 
 const loader = document.getElementById("loader");
 const container = document.getElementById("container");
-
-const formatData = (questionData) => {
-  const result = questionData.map((item) => {
-    const questionObject = { question: item.question };
-    const answers = [...item.incorrect_answers];
-    const correctAnswerIndex = Math.floor(Math.random() * 4);
-    // we create correctAnswerIndex to put our correct answer into the array index
-    answers.splice(correctAnswerIndex, 0, item.correct_answer);
-    // we said start from correctAnswerIndex delete 0 item and add correct answer
-    questionObject.answers = answers;
-    questionObject.correctAnswer = item.correct_answer;
-    return questionObject;
-  });
-  return result;
-};
 
 const fetchData = async () => {
   try {
