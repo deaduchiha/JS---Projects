@@ -19,7 +19,7 @@
 }
 
 #container {
-  /* display: none; */
+  display: none;
   width: 100%;
   margin: 20px au to;
   padding: 20px;
