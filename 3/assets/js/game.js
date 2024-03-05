@@ -4,21 +4,31 @@
 // BASE_URL-> https://opentdb.com ---- end point -> /api.php ---- queries -> ?amount=10&difficulty=medium&type=multiple
 const URL =
   "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
-let formattedData = null;
+let formattedData = null; // for having global variable of our data
 
 const loader = document.getElementById("loader");
 const container = document.getElementById("container");
 
 const formatData = (questionData) => {
-  console.log(questionData);
+  const result = questionData.map((item) => {
+    const questionObject = { question: item.question };
+    const answers = [...item.incorrect_answers];
+    const correctAnswerIndex = Math.floor(Math.random() * 4);
+    // we create correctAnswerIndex to put our correct answer into the array index
+    answers.splice(correctAnswerIndex, 0, item.correct_answer);
+    // we said start from correctAnswerIndex delete 0 item and add correct answer
+    questionObject.answers = answers;
+    questionObject.correctAnswer = item.correct_answer;
+    return questionObject;
+  });
+  return result;
 };
 
 const fetchData = async () => {
   try {
     const res = await fetch(URL);
     const data = await res.json();
-    formattedData = data;
-    formatData(data.results);
+    formattedData = formatData(data.results);
     start(); // we are calling start function to make loader none and show container
   } catch (error) {
     console.log(error);
