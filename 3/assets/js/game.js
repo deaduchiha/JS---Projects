@@ -18,6 +18,7 @@ const questionText = document.getElementById("question-text");
 const answerList = document.querySelectorAll(".answer-text");
 const scoreText = document.getElementById("score");
 const nextButton = document.getElementById("next-button");
+const finishButton = document.getElementById("finish-button");
 const questionNumber = document.getElementById("question-number");
 
 const fetchData = async () => {
@@ -72,7 +73,7 @@ const nextHandler = () => {
     removeClasses();
     showQuestion();
   } else {
-    window.location.assign("end.html");
+    finishHandler();
   }
 };
 
@@ -82,8 +83,14 @@ const removeClasses = () => {
   });
 };
 
+const finishHandler = () => {
+  localStorage.setItem("score", JSON.stringify(score));
+  window.location.assign("end.html");
+};
+
 window.addEventListener("load", fetchData);
 nextButton.addEventListener("click", nextHandler);
 answerList.forEach((button, index) => {
   button.addEventListener("click", (event) => checkAnswer(event, index));
 });
+finishButton.addEventListener("click", finishHandler);
