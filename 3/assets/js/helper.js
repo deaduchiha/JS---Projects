@@ -7,7 +7,7 @@ const formatData = (questionData) => {
     answers.splice(correctAnswerIndex, 0, item.correct_answer);
     // we said start from correctAnswerIndex delete 0 item and add correct answer
     questionObject.answers = answers;
-    questionObject.correctAnswer = item.correct_answer;
+    questionObject.correctAnswerIndex = correctAnswerIndex;
     return questionObject;
   });
   return result;

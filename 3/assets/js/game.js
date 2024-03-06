@@ -7,7 +7,7 @@ const URL =
   "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
 let formattedData = null; // for having global variable of our data
 let questionIndex = 0;
-let correctAnswer = null;
+let correctAnswer = null; // we need it to apply correct answer in our function
 
 const loader = document.getElementById("loader");
 const container = document.getElementById("container");
@@ -34,6 +34,7 @@ const start = () => {
 const showQuestion = () => {
   const { question, answers, correctAnswerIndex } =
     formattedData[questionIndex];
+
   correctAnswer = correctAnswerIndex;
   questionText.innerHTML = question;
 
@@ -42,9 +43,18 @@ const showQuestion = () => {
   });
 };
 
-const checkAnswer = () => {};
+const checkAnswer = (event, index) => {
+  const isCorrect = index === correctAnswer ? true : false;
+
+  if (isCorrect) {
+    event.target.classList.add("correct");
+  } else {
+    event.target.classList.add("incorrect");
+    answerList[correctAnswer].classList.add("correct");
+  }
+};
 
 window.addEventListener("load", fetchData);
 answerList.forEach((button, index) => {
-  button.addEventListener("click", checkAnswer);
+  button.addEventListener("click", (event) => checkAnswer(event, index));
 });
