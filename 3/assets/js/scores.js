@@ -1,13 +1,12 @@
 const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
 const list = document.querySelector("ol");
-list.innerHTML = highScores
-  .map((score, index) => {
-    return `
+list.innerHTML = highScores.map(
+  (score, index) =>
+    `
     <li> 
         <span>${index + 1}</span>
         <p>${score.name}</p>
         <span>${score.score}</span>
-    </li>`;
-  })
-  .join("");
+    </li>`
+);
