@@ -4,8 +4,8 @@ import formatData from "./helper.js";
 // this is our API => https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple
 // BASE_URL-> https://opentdb.com ---- end point -> /api.php ---- queries -> ?amount=10&difficulty=medium&type=multiple
 const CORRECT_BONUS = 10;
-const URL =
-  "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
+const level = localStorage.getItem("level") || "medium";
+const URL = `https://opentdb.com/api.php?amount=10&difficulty=${level}&type=multiple`;
 let formattedData = null; // for having global variable of our data
 let questionIndex = 0;
 let correctAnswer = null; // we need it to apply correct answer in our function
