@@ -20,6 +20,7 @@ const scoreText = document.getElementById("score");
 const nextButton = document.getElementById("next-button");
 const finishButton = document.getElementById("finish-button");
 const questionNumber = document.getElementById("question-number");
+const error = document.getElementById("error");
 
 const fetchData = async () => {
   try {
@@ -28,7 +29,8 @@ const fetchData = async () => {
     formattedData = formatData(data.results);
     start(); // we are calling start function to make loader none and show container
   } catch (error) {
-    console.log("we have error: ", error);
+    loader.style.display = "none";
+    error.style.display = "block";
   }
 };
 
@@ -36,6 +38,7 @@ const start = () => {
   showQuestion();
   loader.style.display = "none";
   container.style.display = "block";
+  error.style.display = "none";
 };
 
 const showQuestion = () => {
