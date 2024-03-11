@@ -12,10 +12,7 @@ class Products {
   createCard(data) {
     // create a div for our product
     const cardElement = document.createElement("div");
-    // create img for product image
-    const img = document.createElement("img");
-    img.src = data.image;
-    img.alt = data.alt;
+    const img = this.productImg(data);
 
     // create info for products information
     const info = document.createElement("div");
@@ -33,6 +30,16 @@ class Products {
 
     cardElement.append(img, info);
     this.parent.appendChild(cardElement, info);
+  }
+
+  // create img for product image
+  productImg() {
+    const img = document.createElement("img");
+    img.src = data.image;
+    img.alt = data.alt;
+
+    return img;
+    // cardElement.appendChild(img);
   }
 }
 
