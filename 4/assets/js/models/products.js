@@ -12,34 +12,50 @@ class Products {
   createCard(data) {
     // create a div for our product
     const cardElement = document.createElement("div");
+
     const img = this.productImg(data);
+    const info = this.productInfo(data);
 
-    // create info for products information
-    const info = document.createElement("div");
-    const productName = document.createElement("h3");
-    const control = document.createElement("div");
-    const price = document.createElement("span");
-    const button = document.createElement("button");
-    productName.innerText = data.name;
-    price.innerText = data.price;
-    button.innerText = "+";
+    cardElement.innerHTML = img; // we should do this to our div cause we are using return string in productImg()
+    cardElement.innerHTML += info;
 
-    // append our product details
-    control.append(price, button);
-    info.append(productName, control);
-
-    cardElement.append(img, info);
-    this.parent.appendChild(cardElement, info);
+    this.parent.appendChild(cardElement);
   }
 
   // create img for product image
-  productImg() {
-    const img = document.createElement("img");
-    img.src = data.image;
-    img.alt = data.alt;
+  productImg(data) {
+    const { image, alt } = data;
+    // const img = document.createElement("img");
+    // img.src = image;
+    // img.alt = alt;
+    const imgJSX = `<img src=${image} alt=${alt}/>`; // better way
 
-    return img;
+    return imgJSX;
     // cardElement.appendChild(img);
+  }
+  // create info for products information
+  productInfo(data) {
+    const { id, name, price } = data;
+    // const info = document.createElement("div");
+    // const productName = document.createElement("h3");
+    // const control = document.createElement("div");
+    // const price = document.createElement("span");
+    // const button = document.createElement("button");
+    // productName.innerText = data.name;
+    // price.innerText = data.price;
+    // button.innerText = "+";
+
+    const infoJSX = `
+        <div >
+            <h3>${name}</h3>
+            <div>
+                <span>${price}</span>
+                <button data-id=${id}>+</button>
+            </div>
+        </div>
+    `;
+
+    return infoJSX;
   }
 }
 
