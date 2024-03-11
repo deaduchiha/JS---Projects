@@ -6,6 +6,7 @@ const productsNode = document.getElementById("products");
 const render = async () => {
   const productsData = await fetchData();
   const productsInstance = new Products(productsNode, productsData);
+  productsInstance.showProducts();
   console.log(productsInstance);
 };
 document.addEventListener("DOMContentLoaded", render);
