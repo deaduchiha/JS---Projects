@@ -46,7 +46,7 @@ class Products {
     // button.innerText = "+";
 
     const infoJSX = `
-        <div >
+        <div id="product-info">
             <h3>${name}</h3>
             <div>
                 <span>${price}</span>
