@@ -2,6 +2,8 @@ class Products {
   constructor(parent, products) {
     this.parent = parent;
     this.products = products;
+    this.parent.addEventListener("click", this); // this is for our unique handler
+    // تو اینجا چک میکنه که ما اون تابع خاص رو داریم یا نه
   }
 
   // [1] this method for getting our products and mapping on them
@@ -56,6 +58,20 @@ class Products {
     `;
 
     return infoJSX;
+  }
+
+  // this is unique name for event listener
+  handleEvent() {
+    const element = event.target;
+    if (element.tagName === "BUTTON") {
+      this.addToCard(element.dataset.id);
+    } else {
+      return;
+    }
+  }
+
+  addToCard(id) {
+    console.log(id);
   }
 }
 
