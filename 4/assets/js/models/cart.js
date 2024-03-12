@@ -14,6 +14,8 @@ class Cart {
       const quantity = this.products.filter((p) => p === product).length; // filter return us an array we just take the length here
       this.createCard(product, quantity); // we need product and quantity
     });
+
+    this.calculateTotalPrice();
   }
 
   createCard(data, quantity) {
@@ -94,6 +96,14 @@ class Cart {
     const newProducts = this.products.filter((p) => p.id !== +id);
     this.products = newProducts;
     this.showProducts();
+  }
+
+  calculateTotalPrice() {
+    const total = this.products.reduce(
+      (accumulator, currentItem) => (accumulator += currentItem.price),
+      0
+    );
+    this.price.innerText = `$ ${total}`;
   }
 }
 
