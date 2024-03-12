@@ -1,9 +1,10 @@
 class Products {
-  constructor(parent, products) {
+  constructor(parent, products, cart) {
     this.parent = parent;
     this.products = products;
     this.parent.addEventListener("click", this); // this is for our unique handler
     // تو اینجا چک میکنه که ما اون تابع خاص رو داریم یا نه
+    this.cart = cart;
   }
 
   // [1] this method for getting our products and mapping on them
@@ -71,7 +72,9 @@ class Products {
   }
 
   addToCard(id) {
-    console.log(id);
+    const product = this.products.find((item) => item.id === +id);
+    this.cart.products.push(product);
+    console.log(this.cart.products);
   }
 }
 
