@@ -19,7 +19,7 @@ class Cart {
     const cardElement = document.createElement("div");
     const imgElement = this.productImg(data);
     const infoElement = this.productInfo(data);
-    const controlElement = this.productInfo(data, quantity);
+    const controlElement = this.productControl(data, quantity);
 
     cardElement.innerHTML = imgElement;
     cardElement.innerHTML += infoElement;
@@ -36,7 +36,7 @@ class Cart {
     const { name, price } = data;
 
     const infoJSX = `
-        <div>
+        <div id="cart-info">
             <h4>${name}</h4>
             <p>${price}</p>
         </div>
@@ -46,7 +46,7 @@ class Cart {
   productControl(data, quantity) {
     const { id } = data;
     const controlJSX = `
-        <div>
+        <div id="cart-control">
             <div>
                 <button data-id=${id}>-</button>
                 <span>${quantity}</span>
