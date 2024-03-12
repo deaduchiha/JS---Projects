@@ -74,7 +74,7 @@ class Products {
   addToCard(id) {
     const product = this.products.find((item) => item.id === +id);
     this.cart.products.push(product);
-    console.log(this.cart.products);
+    this.cart.showProducts();
   }
 }
 
