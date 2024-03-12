@@ -1,29 +1,29 @@
-class Products {
+import Display from "./display.js";
+
+class Products extends Display {
   constructor(parent, products, cart) {
-    this.parent = parent;
-    this.products = products;
-    this.parent.addEventListener("click", this); // this is for our unique handler
-    // تو اینجا چک میکنه که ما اون تابع خاص رو داریم یا نه
+    super(parent, products);
     this.cart = cart;
   }
 
   // [1] this method for getting our products and mapping on them
   showProducts() {
     this.products.forEach((product) => this.createCard(product));
+    // this is polymorphism for last refactor
   }
-  // [2] this method for create our products card
-  createCard(data) {
-    // create a div for our product
-    const cardElement = document.createElement("div");
+  //   // [2] this method for create our products card
+  //   createCard(data) {
+  //     // create a div for our product
+  //     const cardElement = document.createElement("div");
 
-    const img = this.productImg(data);
-    const info = this.productInfo(data);
+  //     const img = this.productImg(data);
+  //     const info = this.productInfo(data);
 
-    cardElement.innerHTML = img; // we should do this to our div cause we are using return string in productImg()
-    cardElement.innerHTML += info;
+  //     cardElement.innerHTML = img; // we should do this to our div cause we are using return string in productImg()
+  //     cardElement.innerHTML += info;
 
-    this.parent.appendChild(cardElement);
-  }
+  //     this.parent.appendChild(cardElement);
+  //   }
 
   // create img for product image
   productImg(data) {

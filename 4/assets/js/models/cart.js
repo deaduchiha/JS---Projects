@@ -1,35 +1,36 @@
-class Cart {
+import Display from "./display.js";
+
+class Cart extends Display {
   constructor(parent, price) {
-    this.parent = parent;
+    super(parent);
     this.price = price;
     this.products = [];
     this.toShow = [];
-    this.parent.addEventListener("click", this);
   }
 
-  showProducts() {
-    this.toShow = [...new Set(this.products)]; // remove duplicate items in our array
-    this.parent.innerHTML = "";
-    this.toShow.forEach((product) => {
-      const quantity = this.products.filter((p) => p === product).length; // filter return us an array we just take the length here
-      this.createCard(product, quantity); // we need product and quantity
-    });
+  //   showProducts() {
+  //     this.toShow = [...new Set(this.products)]; // remove duplicate items in our array
+  //     this.parent.innerHTML = "";
+  //     this.toShow.forEach((product) => {
+  //       const quantity = this.products.filter((p) => p === product).length; // filter return us an array we just take the length here
+  //       this.createCard(product, quantity); // we need product and quantity
+  //     });
 
-    this.calculateTotalPrice();
-  }
+  //     this.calculateTotalPrice();
+  //   }
 
-  createCard(data, quantity) {
-    const cardElement = document.createElement("div");
-    const imgElement = this.productImg(data);
-    const infoElement = this.productInfo(data);
-    const controlElement = this.productControl(data, quantity);
+  //   createCard(data, quantity) {
+  //     const cardElement = document.createElement("div");
+  //     const imgElement = this.productImg(data);
+  //     const infoElement = this.productInfo(data);
+  //     const controlElement = this.productControl(data, quantity);
 
-    cardElement.innerHTML = imgElement;
-    cardElement.innerHTML += infoElement;
-    cardElement.innerHTML += controlElement;
+  //     cardElement.innerHTML = imgElement;
+  //     cardElement.innerHTML += infoElement;
+  //     cardElement.innerHTML += controlElement;
 
-    this.parent.appendChild(cardElement);
-  }
+  //     this.parent.appendChild(cardElement);
+  //   }
   productImg(data) {
     const { image, alt } = data;
     const imgJSX = `<img src=${image} alt=${alt}/>`;
