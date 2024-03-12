@@ -16,7 +16,47 @@ class Cart {
   }
 
   createCard(data, quantity) {
-    console.log(data);
+    const cardElement = document.createElement("div");
+    const imgElement = this.productImg(data);
+    const infoElement = this.productInfo(data);
+    const controlElement = this.productInfo(data, quantity);
+
+    cardElement.innerHTML = imgElement;
+    cardElement.innerHTML += infoElement;
+    cardElement.innerHTML += controlElement;
+
+    this.parent.appendChild(cardElement);
+  }
+  productImg(data) {
+    const { image, alt } = data;
+    const imgJSX = `<img src=${image} alt=${alt}/>`;
+    return imgJSX;
+  }
+  productInfo(data) {
+    const { name, price } = data;
+
+    const infoJSX = `
+        <div>
+            <h4>${name}</h4>
+            <p>${price}</p>
+        </div>
+    `;
+    return infoJSX;
+  }
+  productControl(data, quantity) {
+    const { id } = data;
+    const controlJSX = `
+        <div>
+            <div>
+                <button data-id=${id}>-</button>
+                <span>${quantity}</span>
+                <button data-id=${id}>+</button>
+                </div>
+            <button data-id=${id}>remove</button>
+        </div>
+    `;
+
+    return controlJSX;
   }
 }
 
