@@ -6,6 +6,7 @@ To get started with the OpenWeatherMap API, you will need to sign up for an API 
 
 ## How to Use
 
+0. We are going to use Free api key on price tab
 1. Sign up for an API key on the OpenWeatherMap website.
 2. Make HTTP requests to the appropriate API endpoints, such as:
    - Current weather data
