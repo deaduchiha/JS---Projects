@@ -43,6 +43,15 @@ const getCurrentWeatherByCoordinate = async (lat, lon) => {
   return data;
 };
 
+const getForecastWeatherByCoordinate = async (lat, lon) => {
+  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  return data;
+};
+
 const renderCurrentWeather = (data) => {
   const { icon, main } = data.weather[0];
   const { country } = data.sys;
@@ -112,8 +121,13 @@ const locationHandler = () => {
       latitude,
       longitude
     );
-
     renderCurrentWeather(currentData);
+
+    const forecastData = await getForecastWeatherByCoordinate(
+      latitude,
+      longitude
+    );
+    renderForecastWeather(forecastData);
   };
 
   const errorCallback = (err) => {
