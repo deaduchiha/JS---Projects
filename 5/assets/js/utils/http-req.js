@@ -26,7 +26,13 @@ const getWeatherData = async (type, data) => {
     const res = await fetch(url);
     const json = await res.json();
 
-    return json;
+    console.log();
+
+    if (+json.code === 200) {
+      return json;
+    } else {
+      console.log(json.message);
+    }
   } catch (error) {
     console.log(error);
   }
