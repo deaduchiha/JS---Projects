@@ -22,10 +22,14 @@ const getWeatherData = async (type, data) => {
       break;
   }
 
-  const res = await fetch(url);
-  const json = await res.json();
+  try {
+    const res = await fetch(url);
+    const json = await res.json();
 
-  return json;
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default getWeatherData;
