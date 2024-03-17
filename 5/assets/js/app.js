@@ -51,7 +51,6 @@ const renderForecastWeather = (data) => {
   if (!data) return;
 
   forecastContainer.innerHTML = "";
-
   // check endsWith in google
   data = data.list.filter((obj) => obj.dt_txt.endsWith("12:00:00"));
 
@@ -72,7 +71,6 @@ const renderForecastWeather = (data) => {
 };
 
 const searchHandler = async () => {
-  // this is for getting data from api
   const cityName = searchInput.value;
 
   if (!cityName) {
@@ -116,6 +114,15 @@ const locationHandler = () => {
   }
 };
 
+const initHandler = async () => {
+  const currentData = await getWeatherData("current", "sari");
+  renderCurrentWeather(currentData);
+
+  const forecastData = await getWeatherData("forecast", "sari");
+  renderForecastWeather(forecastData);
+};
+
 searchButton.addEventListener("click", searchHandler);
 locationIcon.addEventListener("click", locationHandler);
 modalButton.addEventListener("click", () => removeModal());
+document.addEventListener("DOMContentLoaded", initHandler);
