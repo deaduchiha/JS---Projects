@@ -1,4 +1,5 @@
 import getWeatherData from "./utils/http-req.js";
+import { removeModal, showModal } from "./utils/modal.js";
 
 const DAYS = [
   "Sunday",
@@ -15,6 +16,7 @@ const searchButton = document.querySelector("button");
 const weatherContainer = document.getElementById("weather");
 const locationIcon = document.getElementById("location");
 const forecastContainer = document.getElementById("forecast");
+const modalButton = document.getElementById("modal-button");
 
 const renderCurrentWeather = (data) => {
   const { icon, main } = data.weather[0];
@@ -69,7 +71,10 @@ const searchHandler = async () => {
   // this is for getting data from api
   const cityName = searchInput.value;
 
-  if (!cityName) alert("Please enter your city name.");
+  if (!cityName) {
+    showModal("please enter city name");
+    return;
+  }
 
   const currentData = await getWeatherData("current", cityName);
   renderCurrentWeather(currentData);
@@ -109,3 +114,4 @@ const locationHandler = () => {
 
 searchButton.addEventListener("click", searchHandler);
 locationIcon.addEventListener("click", locationHandler);
+modalButton.addEventListener("click", () => removeModal());

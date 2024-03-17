@@ -22,8 +22,6 @@ const getWeatherData = async (type, data) => {
       break;
   }
 
-  console.log(url);
-
   try {
     const res = await fetch(url);
     const json = await res.json();
