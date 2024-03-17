@@ -4,12 +4,23 @@ const API_KEY = "57a07b2cfdca2958e6d176fb7c835c8b";
 const searchInput = document.querySelector("input");
 const searchButton = document.querySelector("button");
 const weatherContainer = document.getElementById("weather");
+const locationIcon = document.getElementById("location");
 
 const getCurrentWeatherByName = async (city) => {
   const url = `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`;
-  // describe this
+
   const res = await fetch(url);
   const data = await res.json();
+
+  return data;
+};
+
+const getCurrentWeatherByCoordinate = async (lat, lon) => {
+  const url = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
   return data;
 };
 
@@ -47,4 +58,29 @@ const searchHandler = async () => {
   renderCurrentWeather(currentData);
 };
 
+const locationHandler = () => {
+  // search about -> how to get geolocation in JS -> using navigator
+  const positionCallback = async (position) => {
+    const { latitude, longitude } = position.coords;
+
+    const currentData = await getCurrentWeatherByCoordinate(
+      latitude,
+      longitude
+    );
+
+    renderCurrentWeather(currentData);
+  };
+
+  const errorCallback = (err) => {
+    console.log(err);
+  };
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(positionCallback, errorCallback);
+  } else {
+    alert("your browser not support geo location");
+  }
+};
+
 searchButton.addEventListener("click", searchHandler);
+locationIcon.addEventListener("click", locationHandler);
