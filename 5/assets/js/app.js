@@ -1,5 +1,5 @@
-const BASE_URL = `https://api.openweathermap.org/data/2.5/`;
-const API_KEY = "57a07b2cfdca2958e6d176fb7c835c8b";
+import getWeatherData from "./utils/http-req.js";
+
 const DAYS = [
   "Sunday",
   "Monday",
@@ -15,42 +15,6 @@ const searchButton = document.querySelector("button");
 const weatherContainer = document.getElementById("weather");
 const locationIcon = document.getElementById("location");
 const forecastContainer = document.getElementById("forecast");
-
-const getCurrentWeatherByName = async (city) => {
-  const url = `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return data;
-};
-
-const getForecastWeatherByName = async (city) => {
-  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return data;
-};
-
-const getCurrentWeatherByCoordinate = async (lat, lon) => {
-  const url = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return data;
-};
-
-const getForecastWeatherByCoordinate = async (lat, lon) => {
-  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return data;
-};
 
 const renderCurrentWeather = (data) => {
   const { icon, main } = data.weather[0];
@@ -107,10 +71,10 @@ const searchHandler = async () => {
 
   if (!cityName) alert("Please enter your city name.");
 
-  const currentData = await getCurrentWeatherByName(cityName);
+  const currentData = await getWeatherData("current", cityName);
   renderCurrentWeather(currentData);
 
-  const forecastData = await getForecastWeatherByName(cityName);
+  const forecastData = await getWeatherData("forecast", cityName);
   renderForecastWeather(forecastData);
 };
 
@@ -119,16 +83,16 @@ const locationHandler = () => {
   const positionCallback = async (position) => {
     const { latitude, longitude } = position.coords;
 
-    const currentData = await getCurrentWeatherByCoordinate(
-      latitude,
-      longitude
-    );
+    const currentData = await getWeatherData("current", {
+      lat: latitude,
+      lon: longitude,
+    });
     renderCurrentWeather(currentData);
 
-    const forecastData = await getForecastWeatherByCoordinate(
-      latitude,
-      longitude
-    );
+    const forecastData = await getWeatherData("forecast", {
+      lat: latitude,
+      lon: longitude,
+    });
     renderForecastWeather(forecastData);
   };
 
