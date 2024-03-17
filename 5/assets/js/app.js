@@ -80,6 +80,8 @@ const getWeakDay = (date) => {
 };
 
 const renderForecastWeather = (data) => {
+  forecastContainer.innerHTML = "";
+
   // check endsWith in google
   data = data.list.filter((obj) => obj.dt_txt.endsWith("12:00:00"));
 
