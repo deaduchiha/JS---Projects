@@ -23,12 +23,12 @@ const renderCurrentWeather = (data) => {
 
   const weatherJSX = `
     <h1>${name}, ${country}</h1>
-    <div>
+    <div id="main">
         <img src="https://api.openweathermap.org/img/w/${icon}.png" alt="weather icon"/>
         <span>${main}</span>
         <p>${Math.round(temp)} °C</p>
     </div>
-    <div>
+    <div id="info">
         <p>Humidity: <span>${humidity} %</span> </p>
         <p>Wind speed: <span>${speed} m/s</span> </p>
     </div>
