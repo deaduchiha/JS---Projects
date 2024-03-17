@@ -19,6 +19,8 @@ const forecastContainer = document.getElementById("forecast");
 const modalButton = document.getElementById("modal-button");
 
 const renderCurrentWeather = (data) => {
+  if (!data) return;
+
   const { icon, main } = data.weather[0];
   const { country } = data.sys;
   const { name } = data;
@@ -46,6 +48,8 @@ const getWeakDay = (date) => {
 };
 
 const renderForecastWeather = (data) => {
+  if (!data) return;
+
   forecastContainer.innerHTML = "";
 
   // check endsWith in google
