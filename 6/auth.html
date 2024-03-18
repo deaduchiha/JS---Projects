@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auth</title>
+    <title>Login</title>
     <!-- font awesome -->
     <link
       rel="stylesheet"
@@ -14,8 +14,21 @@
     />
     <!-- global css -->
     <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/auth.css" />
   </head>
   <body>
-    Auth
+    <div id="container">
+      <h2>Login</h2>
+      <form>
+        <input type="text" placeholder="username" />
+        <input type="password" placeholder="password" />
+        <button type="submit">login</button>
+      </form>
+      <a href="index.html">
+        <i class="fa-solid fa-arrow-left"></i>
+        <p>back to home</p>
+      </a>
+    </div>
   </body>
 </html>
+<script src="assets/js/auth.js"></script>
