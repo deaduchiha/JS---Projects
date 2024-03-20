@@ -1,5 +1,5 @@
 const validateUsername = (username) => {
-  const regex = /^[a-zA-Z\d_]{4-16}$/;
+  const regex = /^[a-zA-Z\d_]{4,16}$/;
 
   const result = regex.test(username);
 
