@@ -4,7 +4,8 @@
 // for each CRUD from client server can know that which token is requesting => میتونیم بفهمیم فرستنده کیه
 
 import { postData } from "./utils/http-req.js";
-import { getCookie, setCookie } from "./utils/cookie.js";
+import { setCookie } from "./utils/cookie.js";
+import authHandler from "./utils/authorization.js";
 
 // SECOND: what is JWT(json web token)? -> we can share our secret data as ENCODED JSON between server and data
 // Performs an encryption operation that we cannot understand what it is, and only the backend knows it
@@ -35,12 +36,5 @@ const submitHandler = async (event) => {
   location.assign("index.html");
 };
 
-const init = () => {
-  const cookie = getCookie();
-  if (cookie) {
-    location.assign("index.html");
-  }
-};
-
 button.addEventListener("click", submitHandler);
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", authHandler);
