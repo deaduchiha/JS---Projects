@@ -4,7 +4,7 @@
 // for each CRUD from client server can know that which token is requesting => میتونیم بفهمیم فرستنده کیه
 
 import { postData } from "./utils/http-req.js";
-import { setCookie } from "./utils/validation.js";
+import { setCookie } from "./utils/cookie.js";
 
 // SECOND: what is JWT(json web token)? -> we can share our secret data as ENCODED JSON between server and data
 // Performs an encryption operation that we cannot understand what it is, and only the backend knows it
