@@ -6,6 +6,7 @@
 import { postData } from "./utils/http-req.js";
 import { setCookie } from "./utils/cookie.js";
 import authHandler from "./utils/authorization.js";
+import { validateForm } from "./utils/validation.js";
 
 // SECOND: what is JWT(json web token)? -> we can share our secret data as ENCODED JSON between server and data
 // Performs an encryption operation that we cannot understand what it is, and only the backend knows it
@@ -25,6 +26,10 @@ const submitHandler = async (event) => {
 
   const username = inputs[0].value;
   const password = inputs[1].value;
+
+  const validation = validateForm(username, password);
+
+  if (!validation) return;
 
   const response = await postData("auth/login", {
     username,
