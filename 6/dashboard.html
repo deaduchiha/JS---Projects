@@ -14,9 +14,29 @@
     />
     <!-- global css -->
     <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
   </head>
   <body>
-    Dashboard
+    <header>
+      <h3>web dev</h3>
+      <div>
+        <a href="index.html">
+          home
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <button>
+          logout
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <h1>users list</h1>
+      <div id="container">
+        <span id="loader"></span>
+      </div>
+    </main>
   </body>
 </html>
 <script src="assets/js/dashboard.js" type="module"></script>
