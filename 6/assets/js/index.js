@@ -4,6 +4,10 @@ import { getData } from "./utils/http-req.js";
 const loginButton = document.getElementById("login");
 const dashboardButton = document.getElementById("dashboard");
 const mainContainer = document.getElementById("products");
+const searchButton = document.querySelector("button");
+const inputBox = document.querySelector("input");
+
+let allProducts = null;
 
 const shortenText = (text) => {
   return text.split(" ").slice(0, 3).join(" ");
@@ -52,8 +56,21 @@ const init = async () => {
     dashboardButton.style.display = "none";
   }
 
-  const allProducts = await getData("products");
+  allProducts = await getData("products");
   showProducts(allProducts);
 };
 
+const searchHandler = () => {
+  const query = inputBox.value.trim().toLowerCase();
+
+  if (!query) showProducts(allProducts);
+
+  const filterProducts = allProducts.filter((product) =>
+    product.title.toLowerCase().includes(query)
+  );
+
+  showProducts(filterProducts);
+};
+
 document.addEventListener("DOMContentLoaded", init);
+searchButton.addEventListener("click", searchHandler);
