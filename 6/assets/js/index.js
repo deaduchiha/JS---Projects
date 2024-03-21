@@ -6,6 +6,7 @@ const dashboardButton = document.getElementById("dashboard");
 const mainContainer = document.getElementById("products");
 const searchButton = document.querySelector("button");
 const inputBox = document.querySelector("input");
+const listItems = document.querySelectorAll("li");
 
 let allProducts = null;
 
@@ -72,5 +73,26 @@ const searchHandler = () => {
   showProducts(filterProducts);
 };
 
+const filterHandler = (event) => {
+  const category = event.target.innerText.toLowerCase();
+
+  listItems.forEach((li) => {
+    if (li.innerText.toLowerCase() === category) {
+      li.className = "selected";
+    } else {
+      li.className = "";
+    }
+  });
+
+  if (category === "all") return showProducts(allProducts);
+
+  const filterProducts = allProducts.filter(
+    (p) => p.category.toLowerCase() === category
+  );
+
+  showProducts(filterProducts);
+};
+
 document.addEventListener("DOMContentLoaded", init);
 searchButton.addEventListener("click", searchHandler);
+listItems.forEach((li) => li.addEventListener("click", filterHandler));
