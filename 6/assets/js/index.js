@@ -9,6 +9,8 @@ const inputBox = document.querySelector("input");
 const listItems = document.querySelectorAll("li");
 
 let allProducts = null;
+let search = "";
+let category = "all";
 
 const shortenText = (text) => {
   return text.split(" ").slice(0, 3).join(" ");
@@ -61,20 +63,54 @@ const init = async () => {
   showProducts(allProducts);
 };
 
-const searchHandler = () => {
-  const query = inputBox.value.trim().toLowerCase();
+const filterProducts = () => {
+  // let filterProducts = null;
 
-  if (!query) showProducts(allProducts);
+  // if (search) {
+  //   if (category === "all") {
+  //     filterProducts = allProducts.filter((product) =>
+  //       product.title.toLowerCase().includes(search)
+  //     );
+  //   } else {
+  //     filterProducts = allProducts.filter(
+  //       (product) =>
+  //         product.title.toLowerCase().includes(search) &&
+  //         product.category.toLowerCase() === category
+  //     );
+  //   }
+  // } else {
+  //   if (category === "all") {
+  //     filterProducts = allProducts;
+  //   } else {
+  //     filterProducts.allProducts.filter(
+  //       (product) => product.category.toLowerCase() === category
+  //     );
+  //   }
+  // }
 
-  const filterProducts = allProducts.filter((product) =>
-    product.title.toLowerCase().includes(query)
-  );
+  // better way👇🏽
+  const filterProducts = allProducts.filter((product) => {
+    if (category === "all") {
+      return product.title.toLowerCase().includes(search);
+    } else {
+      return (
+        product.title.toLowerCase().includes(search) &&
+        product.category.toLowerCase() === category
+      );
+    }
+  });
 
   showProducts(filterProducts);
 };
 
+const searchHandler = () => {
+  search = inputBox.value.trim().toLowerCase();
+
+  filterProducts();
+};
+
 const filterHandler = (event) => {
-  const category = event.target.innerText.toLowerCase();
+  category = event.target.innerText.toLowerCase();
 
   listItems.forEach((li) => {
     if (li.innerText.toLowerCase() === category) {
@@ -84,13 +120,7 @@ const filterHandler = (event) => {
     }
   });
 
-  if (category === "all") return showProducts(allProducts);
-
-  const filterProducts = allProducts.filter(
-    (p) => p.category.toLowerCase() === category
-  );
-
-  showProducts(filterProducts);
+  filterProducts();
 };
 
 document.addEventListener("DOMContentLoaded", init);
